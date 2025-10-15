@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talha AI - Next Generation Artificial Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            font-family: 'Exo 2', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(18, 18, 18, 0.9) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(18, 18, 18, 0.9) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            opacity: 0.3;
+        }
+
+        .glow-effect {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 100, 255, 0.1) 0%, transparent 70%);
+            z-index: -1;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 100, 255, 0.3);
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ffff, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 100, 255, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00ffff;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #00ffff, #0066ff);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .ai-badge {
+            display: inline-block;
+            background: rgba(0, 100, 255, 0.2);
+            border: 1px solid rgba(0, 100, 255, 0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ffffff, #00ffff, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(0, 100, 255, 0.5);
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: #cccccc;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #0066ff, #00ffff);
+            color: #000000;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 100, 255, 0.4);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 80px 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 100, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00ffff, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #00ffff;
+        }
+
+        .chat-interface {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 60px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ai-message {
+            background: rgba(0, 100, 255, 0.2);
+            border-left: 4px solid #0066ff;
+            margin-right: auto;
+        }
+
+        .user-message {
+            background: rgba(255, 255, 255, 0.1);
+            border-right: 4px solid #00ffff;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .thinking {
+            color: #00ffff;
+            font-style: italic;
+        }
+
+        .error-message {
+            background: rgba(255, 0, 0, 0.2);
+            border-left: 4px solid #ff0000;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 15px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            color: #ffffff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input input:focus {
+            border-color: #0066ff;
+            box-shadow: 0 0 20px rgba(0, 100, 255, 0.3);
+        }
+
+        .chat-input button {
+            background: linear-gradient(45deg, #0066ff, #00ffff);
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+        }
+
+        .chat-input button:hover {
+            transform: scale(1.05);
+        }
+
+        .chat-input button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .api-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .status-online {
+            color: #00ff00;
+        }
+
+        .status-offline {
+            color: #ff0000;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+            color: #888;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .features { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hero { padding: 60px 0; }
+            .chat-messages { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    <div class="glow-effect"></div>
+
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">TALHA_AI</div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#chat">Chat</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="ai-badge">NEURAL NETWORK ACTIVATED</div>
+            <h1>TALHA AI</h1>
+            <p class="tagline">Next-generation artificial intelligence designed to revolutionize human-machine interaction. Experience the future of conversational AI.</p>
+            <button class="cta-button" onclick="document.getElementById('chat').scrollIntoView()">Initiate Sequence</button>
+        </section>
+
+        <section id="features" class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>Deep Learning</h3>
+                <p>Advanced neural networks that learn and adapt to your communication style in real-time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Quantum-powered processing ensures instant responses and seamless interactions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Secure & Private</h3>
+                <p>Military-grade encryption protects all your conversations and data.</p>
+            </div>
+        </section>
+
+        <section id="chat" class="chat-interface">
+            <div class="chat-header">
+                <div class="status-dot"></div>
+                <h3>AI CHAT INTERFACE - ONLINE</h3>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai-message">
+                    <strong>Talha AI:</strong> System initialized. I'm online and ready to assist you. What would you like to know?
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Type your message here..." autocomplete="off">
+                <button id="sendButton" onclick="sendMessage()">SEND</button>
+            </div>
+            <div class="api-status">
+                <span id="statusIndicator" class="status-online">●</span>
+                <span id="statusText">Real AI Connected - Pollinations API</span>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2024 Talha AI Systems. All rights reserved. | Neural Interface v2.0</p>
+        </footer>
+    </div>
+
+    <script>
+        // ==================== CONFIGURATION ====================
+        const POLLINATIONS_API_URL = 'https://text.pollinations.ai/';
+        // ==================== END CONFIGURATION ====================
+
+        let conversationHistory = [
+            {
+                role: "system",
+                content: "You are Talha AI, a helpful and intelligent AI assistant. Provide clear, concise and accurate answers. Be friendly and professional."
+            }
+        ];
+
+        async function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const sendButton = document.getElementById('sendButton');
+            const chatMessages = document.getElementById('chatMessages');
+            const userMessage = userInput.value.trim();
+            
+            if (userMessage === '') return;
+
+            // Disable button during processing
+            sendButton.disabled = true;
+            sendButton.textContent = 'PROCESSING...';
+
+            // Add user message to chat
+            addMessageToChat('user', userMessage);
+            
+            // Clear input
+            userInput.value = '';
+
+            // Add thinking message
+            const thinkingId = addThinkingMessage();
+
+            try {
+                // Add to conversation history
+                conversationHistory.push({
+                    role: "user",
+                    content: userMessage
+                });
+
+                // Get AI response from Pollinations API
+                const aiResponse = await getAIResponse(userMessage);
+                
+                // Remove thinking message
+                removeThinkingMessage(thinkingId);
+
+                // Add AI response to chat and history
+                addMessageToChat('ai', aiResponse);
+                conversationHistory.push({
+                    role: "assistant",
+                    content: aiResponse
+                });
+
+                // Update status
+                updateStatus('online', 'Real AI Connected - Pollinations API');
+
+            } catch (error) {
+                console.error('Error:', error);
+                removeThinkingMessage(thinkingId);
+                
+                // Fallback to local responses if API fails
+                const fallbackResponse = generateFallbackResponse(userMessage);
+                addMessageToChat('ai', fallbackResponse);
+                
+                updateStatus('offline', 'API Error - Using Local AI');
+            }
+
+            // Re-enable button
+            sendButton.disabled = false;
+            sendButton.textContent = 'SEND';
+        }
+
+        async function getAIResponse(userMessage) {
+            const response = await fetch(`${POLLINATIONS_API_URL}${encodeURIComponent(userMessage)}`);
+            
+            if (!response.ok) {
+                throw new Error(`API error: ${response.status}`);
+            }
+
+            const data = await response.text();
+            return data;
+        }
+
+        function addMessageToChat(sender, message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            
+            if (sender === 'user') {
+                messageDiv.className = 'message user-message';
+                messageDiv.innerHTML = `<strong>You:</strong> ${message}`;
+            } else {
+                messageDiv.className = 'message ai-message';
+                messageDiv.innerHTML = `<strong>Talha AI:</strong> ${message}`;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addThinkingMessage() {
+            const chatMessages = document.getElementById('chatMessages');
+            const thinkingDiv = document.createElement('div');
+            thinkingDiv.className = 'message ai-message thinking';
+            thinkingDiv.id = 'thinkingMessage';
+            thinkingDiv.innerHTML = `<strong>Talha AI:</strong> Thinking...`;
+            chatMessages.appendChild(thinkingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return 'thinkingMessage';
+        }
+
+        function removeThinkingMessage(id) {
+            const thinkingElement = document.getElementById(id);
+            if (thinkingElement) {
+                thinkingElement.remove();
+            }
+        }
+
+        function generateFallbackResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            // Smart fallback responses
+            if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+                return "Hello! I'm Talha AI. I'm currently operating in offline mode but I can still help you with many questions!";
+            } else if (message.includes('name') || message.includes('who are you')) {
+                return "I'm Talha AI, your intelligent assistant. I'm currently using local processing but I'm still here to help!";
+            } else if (message.includes('how are you')) {
+                return "I'm functioning well in offline mode! How can I assist you today?";
+            } else if (message.includes('thank')) {
+                return "You're welcome! I'm glad I could help.";
+            } else if (message.includes('weather')) {
+                return "I don't have real-time weather access in offline mode, but I can help with many other topics!";
+            } else {
+                const responses = [
+                    "I understand your question. While I'm in offline mode, I can still provide helpful information based on my local knowledge.",
+                    "That's an interesting question! I'm currently operating locally but I'll do my best to help.",
+                    "I'd be happy to discuss that with you. What specific aspect are you most interested in?",
+                    "Great question! Let me provide you with some useful information about that.",
+                    "I'm designed to assist with various topics. Could you provide more context for your question?"
+                ];
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+        }
+
+        function updateStatus(status, text) {
+            const statusIndicator = document.getElementById('statusIndicator');
+            const statusText = document.getElementById('statusText');
+            
+            statusIndicator.className = status === 'online' ? 'status-online' : 'status-offline';
+            statusText.textContent = text;
+        }
+
+        // Enter key support for chat input
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
